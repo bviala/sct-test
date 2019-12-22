@@ -11,11 +11,13 @@ export default new Vuex.Store({
     discounts: []
   },
   getters: {
-    totalQuantity () {
-      // TODO
+    totalQuantity (state) {
+      return Object.values(state.cart) // turn in an array
+        .reduce((quantityAccumulator, product) => quantityAccumulator + product.quantity, 0)
     },
-    rawTotalCost () {
-      // TODO
+    rawTotalCost (state) {
+      return Object.values(state.cart) // turn in an array
+        .reduce((costAccumulator, product) => costAccumulator + product.quantity * product.price, 0)
     },
     appliedDiscounts () {
       // TODO
@@ -35,7 +37,7 @@ export default new Vuex.Store({
       if (quantity < 0) {
         state.cart[productCode].quantity = 0
       } else {
-        state.cart[productCode].quantity = quantity
+        state.cart[productCode].quantity = Number(quantity)
       }
     }
   },

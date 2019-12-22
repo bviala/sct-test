@@ -34,9 +34,8 @@
       </h1>
       <ul class="summary-items wrapper border">
         <li>
-          <span class="summary-items-number">11 Items</span><span
-            class="summary-items-price"
-          >120<span class="currency">€</span></span>
+          <span class="summary-items-number">{{ totalQuantity }} Items</span>
+          <span class="summary-items-price">{{ rawTotalCost }}<span class="currency">€</span></span>
         </li>
       </ul>
       <div class="summary-discounts wrapper-half border">
@@ -62,12 +61,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import Product from '@/components/Product'
 
 export default {
   components: { Product },
-  computed: mapState(['cart']),
+  computed: {
+    ...mapState(['cart']),
+    ...mapGetters(['totalQuantity', 'rawTotalCost'])
+  },
   created () {
     this.$store.dispatch('initializeCart')
   }
