@@ -5,11 +5,14 @@
     </h1>
     <ul class="summary-items wrapper border">
       <li>
-        <span class="summary-items-number">{{ totalQuantity }} Items</span>
+        <span class="summary-items-number">{{ totalQuantity || 'No' }} Items</span>
         <span class="summary-items-price">{{ rawTotalCost }}<span class="currency">€</span></span>
       </li>
     </ul>
-    <div class="summary-discounts wrapper-half border">
+    <div
+      v-if="appliedDiscounts.length"
+      class="summary-discounts wrapper-half border"
+    >
       <h2>Discounts</h2>
       <ul>
         <li
