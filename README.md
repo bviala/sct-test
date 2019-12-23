@@ -1,5 +1,9 @@
 # sct-test
 
+## Live demo
+
+bvialashoppingcartchallenge.surge.sh
+
 ## Technical choices
 
 ### Checkout class
@@ -32,9 +36,22 @@ A limitation of this design is that it doesn't support cross product discounts, 
 
 To achieve this, the getValue functions would have to take the whole cart state as parameter, which would make the discount system more complex.
 
+## How it works
+
+* At application startup, the root App component calls a store action to initialize the Shop.  
+* The store fetches products and discount from a mocked API call defined in `/api/shop.js`.  
+Products and discounts are defined in the `/api/static` folder.
+* Available products, their currently selected quantity (by default 0), and the list of discounts are set in the store state.
+* The Product component, which contains user controls, can update the state by calling store mutations.
+* All the components can use current state and derived values (getters) to display reactive information to the user.
+
 ## Improvements
 
+### Reliability & scalability
+To improve confidence in the codebase and in making changes, tests could be implemented, for example using `vue-test-utils`.  
 
+### Error handling
+The mocked API call always resolves, but an actual http request could fail for many reasons. It should be handled with correct feedback to the user.
 
 ## Project setup
 ```
