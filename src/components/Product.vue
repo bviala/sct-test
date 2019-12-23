@@ -22,9 +22,11 @@
         -
       </button>
       <input
-        v-model="quantity"
-        type="number"
+        :value="quantity"
+        type="text"
+        maxlength="3"
         class="product-quantity"
+        @input="handleInput"
       >
       <button
         class="count"
@@ -69,6 +71,16 @@ export default {
     }
   },
   methods: {
+    handleInput (event) {
+      // we remove all non digit character
+      let sanitized = event.target.value.replace(/\D/g, '')
+
+      // we replace the input value for UI purpose
+      event.target.value = sanitized
+
+      // we set the new quantity
+      this.quantity = sanitized
+    },
     addOne () {
       this.quantity++
     },

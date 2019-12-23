@@ -13,8 +13,8 @@ The store itself acts similarly to a Class: it has read-only attributes (state),
 
 ### Scan method
 The scan function also works differently from the one suggested.
-As the UI allows the user to directly input any quantity, it makes the code more simple if the scan method takes a `quantity` parameter and set the quantity state with this value, rather than incrementing it by 1.  
-The drawback is that we have to manually ensure the passed quantity is valid (no negative, no decimal, no text) when it would have been implicit with the suggested behaviour.
+As the UI allows the user to directly input any quantity, it makes the code more simple that the scan method takes a `quantity` parameter and simply set the quantity state with the passed value, rather than working in an incremental way.
+Otherwise we would have had to also code an `unscan` method, and some loop logic so that these methods are called the right number of time when the user uses the quantity input.
 
 ### Discounts
 
