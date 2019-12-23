@@ -33,11 +33,11 @@ export const discounts = [
   {
     scope: ['X7R2OPX', 'X3W2OPY'],
     name: '2for1',
-    function: TwoForOne
+    compute: TwoForOne
   },
   {
     scope: ['X7R2OPX', 'X3W2OPY'],
     name: 'Bulk',
-    function: Bulk
+    compute: Bulk
   }
 ]

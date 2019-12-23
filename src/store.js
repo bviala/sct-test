@@ -24,7 +24,7 @@ export default new Vuex.Store({
         return discount.scope.map(product => { // for each product it applies to
           return {
             name: `${discount.name} ${state.cart[product].name} offer`,
-            value: discount.function(state.cart[product].quantity, state.cart[product].price)
+            value: discount.compute(state.cart[product].quantity, state.cart[product].price)
           }
         })
       })
