@@ -1,14 +1,22 @@
 <template>
-  <Shop />
+  <main class="App">
+    <Cart />
+    <Summary />
+  </main>
 </template>
 
 <script>
-import Shop from '@/components/Shop'
+import Cart from '@/components/Cart'
+import Summary from '@/components/Summary'
 
 export default {
   name: 'App',
   components: {
-    Shop
+    Cart,
+    Summary
+  },
+  created () {
+    this.$store.dispatch('initializeShop')
   }
 }
 </script>

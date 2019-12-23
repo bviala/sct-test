@@ -34,16 +34,17 @@ export default new Vuex.Store({
         .filter(discount => discount.value > 0)
     },
     finalTotalCost (state, getters) {
-      const totalDiscount = getters.appliedDiscounts.reduce((discountAccumulator, discount) => discountAccumulator + discount.value, 0)
+      const totalDiscount = getters.appliedDiscounts.reduce(
+        (discountAccumulator, discount) => discountAccumulator + discount.value,
+        0
+      )
       return getters.rawTotalCost - totalDiscount
     }
   },
   mutations: {
-    setDiscounts (state, { discounts }) {
-      state.discounts = discounts
-    },
-    setCart (state, { cart }) {
+    initializeShop (state, { cart, discounts }) {
       state.cart = cart
+      state.discounts = discounts
     },
     scanProduct (state, { productCode, quantity }) {
       if (quantity < 0) {
@@ -54,7 +55,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    initializeCart ({ commit }) {
+    initializeShop ({ commit }) {
+      // we transform the product list array returned by the api into an Object map
+      // we use the product code as entry key
+      // each entry value contains both product information and current quantity selected
       const cart = {}
       for (const product of products) {
         cart[product.code] = {
@@ -62,9 +66,7 @@ export default new Vuex.Store({
           quantity: 0
         }
       }
-      commit('setCart', { cart })
-
-      commit('setDiscounts', { discounts })
+      commit('initializeShop', { cart, discounts })
     }
   }
 })
