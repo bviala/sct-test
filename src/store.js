@@ -50,7 +50,9 @@ export default new Vuex.Store({
       if (quantity < 0) {
         state.cart[productCode].quantity = 0
       } else {
-        state.cart[productCode].quantity = Number(quantity)
+        // we use Math.ceil to prevent user from inputing decimals
+        // using ceil instead of round ensures the value is always changed when adding decimals to the current value
+        state.cart[productCode].quantity = Math.ceil(quantity)
       }
     }
   },
