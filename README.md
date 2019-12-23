@@ -2,12 +2,12 @@
 
 ## Live demo
 
-bvialashoppingcartchallenge.surge.sh
+http://bvialashoppingcartchallenge.surge.sh
 
 ## Technical choices
 
 ### Checkout class
-Instead of the suggested Checkout class, I chose to follow Vue paradigms and use a Vuex store to manage the state of the shop.  
+Instead of the suggested Checkout class, I chose to follow the [Vue guide recommendation](https://vuejs.org/v2/guide/state-management.html) and use a Vuex store to manage the state of the shop.  
 It provides several advantages:  
 * It leverages Vue built-in reactivity system, so we don't have to handle it ourselves
 * It cleanly separates business code from presentation code
@@ -24,26 +24,26 @@ Otherwise we would have had to also code an `unscan` method, and some loop logic
 
 Discounts are implemented as Objects containing : 
 * `scope`,  an array containing all the product codes the discount applies to.
-* `name`, a string which is used to display purpose.
-* `getValue`, a function that takes a `quantity` and `price` parameters and computes the value of the discount
+* `name`, a string used to display purpose.
+* `getValue`, a discount function that takes a `quantity` and a `price` parameter and returns the value of the discount.
 
 
-It makes it easy to add new kind of discounts, or change the products they apply to.
+It makes it easy to add new kinds of discounts, or change the products they apply to.
 
 I also built two factory functions to help create discount functions.
 
 A limitation of this design is that it doesn't support cross product discounts, for example "get 3€ off if you buy a cap and a shirt".
 
-To achieve this, the getValue functions would have to take the whole cart state as parameter, which would make the discount system more complex.
+To achieve this, the discount functions would have to take the whole cart state as parameter, which would make the discount system more complex.
 
 ## How it works
 
 * At application startup, the root App component calls a store action to initialize the Shop.  
-* The store fetches products and discount from a mocked API call defined in `/api/shop.js`.  
+* The store fetches products and discount from a mocked API call implemented in `/api/shop.js`.  
 Products and discounts are defined in the `/api/static` folder.
 * Available products, their currently selected quantity (by default 0), and the list of discounts are set in the store state.
-* The Product component, which contains user controls, can update the state by calling store mutations.
-* All the components can use current state and derived values (getters) to display reactive information to the user.
+* The Product component, which contains user controls, can update the stored quantities by calling mutations.
+* All the components can use current state and derived values (getters), that are reactive, to display information to the user.
 
 ## Improvements
 
@@ -52,6 +52,11 @@ To improve confidence in the codebase and in making changes, tests could be impl
 
 ### Error handling
 The mocked API call always resolves, but an actual http request could fail for many reasons. It should be handled with correct feedback to the user.
+
+### Responsive design
+
+As such, the web application is not responsive and will not display correctly on narrow viewports.  
+We could improve that using modern layout methods such as Flexbox and Grid, and some media queries if needed.
 
 ## Project setup
 ```
