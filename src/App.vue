@@ -1,26 +1,43 @@
 <template>
   <main class="App">
-    <Cart />
-    <Summary />
+    <Promised
+      :promise="promise"
+      class="display-contents"
+    >
+      <template v-slot:pending>
+        <Spinner />
+      </template>
+      <Cart />
+      <Summary />
+    </Promised>
   </main>
 </template>
 
 <script>
+import { Promised } from 'vue-promised'
 import Cart from '@/components/Cart'
 import Summary from '@/components/Summary'
+import Spinner from '@/components/Spinner'
 
 export default {
   name: 'App',
   components: {
     Cart,
-    Summary
+    Summary,
+    Promised,
+    Spinner
   },
-  created () {
-    this.$store.dispatch('initializeShop')
+  computed: {
+    promise () {
+      return this.$store.dispatch('initializeShop')
+    }
   }
 }
 </script>
 
 <style>
-@import "main.css";
+  @import "main.css";
+  .display-contents {
+    display: contents;
+  }
 </style>

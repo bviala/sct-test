@@ -1,43 +1,16 @@
-import shirtImg from '@/assets/img/shirt.png'
-import mugImg from '@/assets/img/mug.png'
-import capImg from '@/assets/img/cap.png'
+import { products } from './static/products'
+import { discounts } from './static/discounts'
 
-export const products = [
-  {
-    code: 'X7R2OPX',
-    name: 'Shirt',
-    img: shirtImg,
-    price: 20
-  },
-  {
-    code: 'X2G2OPZ',
-    name: 'Mug',
-    img: mugImg,
-    price: 5
-  },
-  {
-    code: 'X3W2OPY',
-    name: 'Cap',
-    img: capImg,
-    price: 10
-  }
-]
+const DELAY = 2000
 
-const XplusYDiscountFactory = (X, Y) => (itemQuantity, itemPrice) => Math.trunc(itemQuantity / (X + Y)) * itemPrice
-const BulkDiscountFactory = (treshold, cut) => (itemQuantity, itemPrice) => itemQuantity >= treshold ? itemQuantity * itemPrice * cut : 0
-
-const TwoForOne = XplusYDiscountFactory(1, 1)
-const Bulk = BulkDiscountFactory(3, 0.05)
-
-export const discounts = [
-  {
-    scope: ['X7R2OPX', 'X3W2OPY'],
-    name: '2for1',
-    getValue: TwoForOne
-  },
-  {
-    scope: ['X7R2OPX', 'X3W2OPY'],
-    name: 'Bulk',
-    getValue: Bulk
-  }
-]
+// we mock a request to an external API
+export const getShopInfo = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        products,
+        discounts
+      })
+    }, DELAY)
+  })
+}

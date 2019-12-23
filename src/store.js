@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { products, discounts } from '@/api/shop'
+import { getShopInfo } from '@/api/shop'
 
 Vue.use(Vuex)
 
@@ -57,7 +57,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    initializeShop ({ commit }) {
+    async initializeShop ({ commit }) {
+      const { products, discounts } = await getShopInfo()
+
       // we transform the product list array returned by the api into an Object map
       // we use the product code as entry key
       // each entry value contains both product information and current quantity selected
