@@ -2,7 +2,7 @@
 
 ## Live demo
 
-http://bvialashoppingcartchallenge.surge.sh
+[bvialacheckoutchallenge.surge.sh](http://bvialacheckoutchallenge.surge.sh)
 
 ## Technical choices
 
