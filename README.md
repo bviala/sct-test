@@ -28,9 +28,10 @@ Discounts are implemented as Objects containing :
 * `getValue`, a discount function that takes a `quantity` and a `price` parameter and returns the value of the discount.
 
 
-It makes it easy to add new kinds of discounts, or change the products they apply to.
-
 I also built two factory functions to help create discount functions.
+
+It makes it very easy to add new types of discounts, and change their parameters or the products they apply to.
+Feel free to play with this in `/api/static/discounts.js`
 
 A limitation of this design is that it doesn't support cross product discounts, for example "get 3€ off if you buy a cap and a shirt".
 
