@@ -9,21 +9,23 @@
         <span class="summary-items-price">{{ rawTotalCost }}<span class="currency">€</span></span>
       </li>
     </ul>
-    <div
-      v-if="appliedDiscounts.length"
-      class="summary-discounts wrapper-half border"
-    >
-      <h2>Discounts</h2>
-      <ul>
-        <li
-          v-for="discount in appliedDiscounts"
-          :key="discount.name"
-        >
-          <span>{{ discount.name }}</span>
-          <span>-{{ discount.value }} €</span>
-        </li>
-      </ul>
-    </div>
+    <transition name="fade">
+      <div
+        v-if="appliedDiscounts.length"
+        class="summary-discounts wrapper-half border"
+      >
+        <h2>Discounts</h2>
+        <ul>
+          <li
+            v-for="discount in appliedDiscounts"
+            :key="discount.name"
+          >
+            <span>{{ discount.name }}</span>
+            <span>-{{ discount.value }} €</span>
+          </li>
+        </ul>
+      </div>
+    </transition>
     <div class="summary-total wrapper">
       <ul>
         <li>
@@ -50,3 +52,11 @@ export default {
   ])
 }
 </script>
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>
