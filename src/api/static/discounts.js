@@ -25,7 +25,7 @@ const Bulk = BulkDiscountFactory(3, 0.05)
 
 export const discounts = [
   {
-    scope: ['X3W2OPY'],
+    scope: ['X3W2OPY', 'X2G2OPZ'],
     name: '2for1',
     getValue: TwoForOne
   },

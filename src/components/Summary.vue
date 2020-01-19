@@ -12,18 +12,23 @@
     <transition name="fade">
       <div
         v-if="appliedDiscounts.length"
-        class="summary-discounts wrapper-half border"
+        class="summary-discounts wrapper-half"
       >
         <h2>Discounts</h2>
-        <ul>
+        <transition-group
+          name="list"
+          tag="ul"
+          class="list"
+        >
           <li
             v-for="discount in appliedDiscounts"
             :key="discount.name"
+            class="list-item"
           >
             <span>{{ discount.name }}</span>
             <span>-{{ discount.value }} €</span>
           </li>
-        </ul>
+        </transition-group>
       </div>
     </transition>
     <div class="summary-total wrapper">
@@ -58,5 +63,27 @@ export default {
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.list {
+  position: relative;
+}
+
+.list-leave-active {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+}
+
+.list-move {
+  transition: transform;
+}
+
+.list-item {
+  transition: all 0.3s;
 }
 </style>
